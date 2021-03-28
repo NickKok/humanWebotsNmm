@@ -1,0 +1,88 @@
+#!/bin/bash
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script launch a sml version running on webots
+
+OPTIONS:
+   -h      Show this message
+   -s      Setting file name
+   -c      Config folder prefix
+EOF
+}
+
+SETTING=
+CONFIG=""
+while getopts “:h:s:c:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         s)
+             SETTING=$OPTARG
+             ;;
+         c)
+	     if [[ -z CONFIG ]]; then
+		CONFIG=
+             else
+                CONFIG=$OPTARG
+	     fi
+             ;;
+         ?)
+             exit
+             ;;
+     esac
+done
+
+
+if ($(uname),Darwin)
+then
+LIB_PATH=${A:-$HOME/.local/usr/lib}
+WEBOTS_PATH=${B:-/Applications/Webots/webots}
+else
+LIB_PATH=${A:-$HOME/.local/usr/lib}
+WEBOTS_PATH=${B:-/usr/local/webots743/webots}
+fi
+
+
+#result=`LD_LIBRARY_PATH=$LIB_PATH $WEBOTS_PATH --minimize --mode=fast`
+
+#GET CURRENT WEBOTS FILE
+currentFile=`find ~/.webotsrc  | xargs grep 'currentFile:'`
+currentFile=`echo ${currentFile#"currentFile:"} | tr -d ' '`
+
+find $HOME/.webotsrc | xargs perl -pi -e 's/STOP/FAST/g'
+
+var=( "$@" )
+
+if ! [[ -z $SETTING ]];then
+	unset var[0]
+	unset var[1]
+fi
+if ! [[ -z $CONFIG ]];then
+	unset var[2]
+	unset var[3]
+fi
+
+#for i in "${var[@]}"; do
+for i in "$@"; do
+	if [[ $i == *.wbt* ]]
+	then
+		echo $i
+		currentFile=$i
+	fi
+done
+
+if ! [[ -z $SETTING ]];then
+	set="$SETTING $CONFIG"
+	replaceBy=" controllerArgs \"${set}\""
+	toReplace=`echo $currentFile | xargs find | xargs grep 'controllerArgs'`
+	echo $currentFile | xargs find | xargs perl -pi -e "s/${toReplace}/${replaceBy}/g"
+fi
+echo "LD_LIBRARY_PATH=$LIB_PATH $WEBOTS_PATH $currentFile"
+result=`LD_LIBRARY_PATH=$LIB_PATH $WEBOTS_PATH $currentFile`
+echo $result

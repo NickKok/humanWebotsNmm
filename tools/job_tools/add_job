@@ -1,0 +1,22 @@
+#!/bin/bash
+speed=$1
+exp=$2
+optimizer=$3
+name="temp$speed"
+filepath="./jobs/$name.xml"
+initpop="init_pop_1.3.db"
+launchinggate=1.3
+webotsversion=644
+
+nl=$'\n'
+if [ -f $filepath ]
+then
+rm $filepath
+fi
+job_manager.py -i e $2 -l $launchinggate -s $speed -a $optimizer $webotsversion > $filepath
+#job_manager.py -i -e $2 -l $launchinggate -s $speed -a $optimizer -n $initpop $webotsversion -b > $filepath
+#job_manager.py -i -e FBL -a cmaes -s $speed $webotsversion > $filepath
+#screename="temp$2$speed$3$4"
+#screen -AdmS $screename bash
+#screen -S $screename -p 0 -X stuff $"optirunner ./jobs/temp$speed.xml -o ../../lib/CMAES_2.dll ${nl}"
+echo "Optirunner started on screen $screename with file $name located in $filepath"

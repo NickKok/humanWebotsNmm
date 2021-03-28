@@ -1,0 +1,11 @@
+#!/bin/bash
+echo "Rep:1, Cpg Hybrid B"
+webots_loadlib -s settings_systematic1_cpg_hybridB_1.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridB_2.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridB_3.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridB_4.xml -c articleFrontier >/dev/null 2>&1
+echo "Rep:1, Cpg Hybrid A"
+webots_loadlib -s settings_systematic1_cpg_hybridA_1.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridA_2.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridA_3.xml -c articleFrontier >/dev/null 2>&1
+webots_loadlib -s settings_systematic1_cpg_hybridA_4.xml -c articleFrontier >/dev/null 2>&1

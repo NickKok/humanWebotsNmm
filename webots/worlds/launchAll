@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in `ls ./ | grep 'wbt' | grep 'tmp_'`
+do
+   echo "Launching $i"
+   webotsNoStop $i &
+   sleep 1
+done

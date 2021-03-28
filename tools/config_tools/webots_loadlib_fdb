@@ -1,0 +1,9 @@
+#!/bin/bash
+val=$1
+if [[ -z val ]]; then
+   option=
+else
+   option="-c $1"
+fi
+
+webots_loadlib -s settings.xml $option

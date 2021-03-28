@@ -1,0 +1,40 @@
+#!/bin/bash
+folder=/home/efx/Development/PHD/Airi/current/webots
+
+error=0
+set_error() {
+    (( error++ )) 
+}
+trap set_error ERR
+cfg_createEmpty $folder/conf_$1 scriptname &>/dev/null
+if [[ error -eq 1 ]]; then
+    echo "Warning ! Seems folder conf_$1 already exists"
+fi
+
+#########
+#cpg_gate
+#########
+#Copy cpg parameters
+cp  $folder/conf/cpg_gate/$1.txt $folder/conf_$1/cpg_gate/cpg_parameters.txt &>/dev/null
+
+#cpg interneurons
+cp $folder/conf/cpg_gate/cpg_interneurons/$1/* $folder/conf_$1/cpg_gate/cpg_interneurons/ &>/dev/null
+cp $folder/conf/cpg_gate/cpg_interneurons_off.txt $folder/conf_$1/cpg_gate/cpg_interneurons.txt &>/dev/null
+#cpg data
+mkdir $folder/conf_$1/cpg_gate/cpg_data/current
+cp -R $folder/conf/cpg_gate/cpg_data/$1/* $folder/conf_$1/cpg_gate/cpg_data/current/ &>/dev/null
+
+###################################
+#fullReflex_gate and launching gate
+###################################
+cp $folder/conf/fullReflex_gate/1.3_3.txt $folder/conf_$1/fullReflex_gate/1.3_3.txt &>/dev/null
+cp $folder/conf/fullReflex_gate/$1.txt $folder/conf_$1/fullReflex_gate/current.txt &>/dev/null
+cp $folder/conf/launching_gate/* $folder/conf_$1/launching_gate/ &>/dev/null
+
+
+#########
+#settings
+#########
+cp $folder/conf/settings/generic/* $folder/conf_$1/settings/
+rep="s/__GAITPREFIX__/$1/g"
+find $folder/conf_$1/settings/ -type f | xargs perl -pi -e $rep

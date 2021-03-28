@@ -1,0 +1,13 @@
+#!/bin/bash
+
+XML="3D_RL_pitEscape.xml"
+
+for (( c=$2; c<=$2+$3; c++ ))
+do
+	echo "Creating world tmp_${1/.wbt/}_$c.wbt --random-seed-port=$c/g'"
+	cp templates/$1 ./tmp_${1/.wbt/}_$c.wbt
+	find ./tmp_${1/.wbt/}_$c.wbt | xargs perl -pi -e "s/__BRAIN_CONNECTOR_PARAM__/--random-seed-port=$c/g"
+	find ./tmp_${1/.wbt/}_$c.wbt | xargs perl -pi -e "s/__BODY_CONFIG_XML__/$XML/g"
+done
+
+

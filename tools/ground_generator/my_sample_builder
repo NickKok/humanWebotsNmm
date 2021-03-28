@@ -1,0 +1,4 @@
+#!/bin/bash
+
+export SML_PATH=/home/efx/Development/sml
+$SML_PATH/tools/ground_generator/wavy_builder $SML_PATH/tools/ground_generator $SML_PATH/controller_current/webots/worlds/ $SML_PATH/tools/ground_generator/world_template_files

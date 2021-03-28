@@ -1,0 +1,651 @@
+#VRML_SIM R2018a utf8
+WorldInfo {
+  info [
+    "Description"
+    "Author: first name last name <e-mail>"
+    "Date: DD MMM YYYY"
+  ]
+  physics "no_lift"
+  basicTimeStep 1
+  contactProperties [
+    DEF CONTACT ContactProperties {
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.015573682269187412 0.9997662456930543 0.014997146174992896 4.749766193608502
+  position -172.02823654264793 6.105146093177247 6.265507217456035
+  follow "REGIS"
+}
+Background {
+  skyColor [
+    0.658824 0.827451 1
+  ]
+}
+DirectionalLight {
+  direction 1 -1 0
+  castShadows TRUE
+}
+DirectionalLight {
+  direction 0 0 1
+}
+DEF REGIS Supervisor {
+  translation 0 1.53 0
+  rotation 1 0 0 0.2
+  children [
+    Transform {
+      rotation 1 0 0 0
+      children [
+        DEF FOOT Group {
+          children [
+            Transform {
+              children [
+                Shape {
+                  appearance Appearance {
+                    material Material {
+                    }
+                  }
+                  geometry Capsule {
+                    height 0.16
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF SHIN Group {
+          children [
+            Transform {
+              translation 0 -0.25 0
+              children [
+                DEF APPEARANCE_SHIN_LEFT Shape {
+                  appearance Appearance {
+                    material Material {
+                    }
+                  }
+                  geometry Capsule {
+                    height 0.35
+                    radius 0.03
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF THIGH Group {
+          children [
+            Transform {
+              translation 0 -0.25 0
+              children [
+                DEF APPEARANCE_THIGH_LEFT Shape {
+                  appearance Appearance {
+                    material Material {
+                    }
+                  }
+                  geometry Capsule {
+                    height 0.35
+                    radius 0.06
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        DEF JOINT Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 1
+              transparency 0.01
+            }
+          }
+          geometry Sphere {
+            radius 0.07
+          }
+        }
+      ]
+    }
+    DEF BRAINRECEIVER Receiver {
+      name "BRAINRECEIVER"
+      channel 3
+    }
+    DEF RECEIVER Receiver {
+      name "RECEIVER"
+      channel 1
+    }
+    DEF EMITTER Emitter {
+      name "EMITTER"
+    }
+    DEF BRAINEMITTER Emitter {
+      name "BRAINEMITTER"
+      channel 2
+    }
+    DEF TRUNK Transform {
+      translation 0 -0.19 0
+      children [
+        DEF TRUNK Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Capsule {
+            height 0.4
+            radius 0.13
+          }
+        }
+      ]
+    }
+    DEF LEFT_LEG Solid {
+      translation 0.08 -0.4 0
+      children [
+        DEF LEFT_HIP Hinge2Joint {
+          jointParameters HingeJointParameters {
+          }
+          jointParameters2 JointParameters {
+            axis 0 0 -1
+          }
+          device [
+            PositionSensor {
+              name "HIP_LEFT_POS"
+            }
+            RotationalMotor {
+              name "HIP_LEFT"
+              minPosition -3.1415
+              maxPosition 3.1415
+              maxTorque 200
+            }
+          ]
+          device2 [
+            PositionSensor {
+              name "HIPCOR_LEFT_POS"
+            }
+            RotationalMotor {
+              name "HIPCOR_LEFT"
+              maxTorque 200
+            }
+          ]
+          endPoint DEF LEFT_THIGH Solid {
+            children [
+              Transform {
+                translation 0 -0.5 0
+                children [
+                  DEF LEFT_KNEE HingeJoint {
+                    jointParameters HingeJointParameters {
+                    }
+                    device [
+                      RotationalMotor {
+                        name "KNEE_LEFT"
+                        minPosition -3.1415
+                        maxPosition 3.1415
+                        maxTorque 200
+                      }
+                      PositionSensor {
+                        name "KNEE_LEFT_POS"
+                      }
+                    ]
+                    endPoint DEF LEFT_SHIN Solid {
+                      rotation 1 0 0 0
+                      children [
+                        USE JOINT
+                        USE SHIN
+                        Transform {
+                          translation 0 -0.5 0
+                          children [
+                            DEF LEFT_ANKLE HingeJoint {
+                              jointParameters HingeJointParameters {
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "ANKLE_LEFT"
+                                  minPosition -3.1415
+                                  maxPosition 3.1415
+                                  maxTorque 200
+                                }
+                                PositionSensor {
+                                  name "ANKLE_LEFT_POS"
+                                }
+                              ]
+                              endPoint DEF LEFT_FOOT Solid {
+                                rotation -1 0 0 0.085
+                                children [
+                                  Transform {
+                                    translation 0 -0.075 0.06
+                                    rotation 1 0 0 1.57
+                                    children [
+                                      DEF SENSOR_HEEL_LEFT TouchSensor {
+                                        name "SENSOR_HEEL_LEFT"
+                                        boundingObject Transform {
+                                          translation 0 -0.075 0
+                                          rotation 1 0 0 0
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_HEEL_LEFT2 TouchSensor {
+                                        translation 0 -0.15 0
+                                        rotation 1 0 0 3.14
+                                        name "SENSOR_HEEL_LEFT2"
+                                        boundingObject Transform {
+                                          translation 0 -0.075 0
+                                          rotation 1 0 0 0
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_TOE_LEFT TouchSensor {
+                                        name "SENSOR_TOE_LEFT"
+                                        boundingObject Transform {
+                                          translation 0 0.075 0
+                                          rotation 1 0 0 1.57
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_TOE_LEFT2 TouchSensor {
+                                        translation 0 0.15 0
+                                        rotation 1 0 0 3.14
+                                        name "SENSOR_TOE_LEFT2"
+                                        boundingObject Transform {
+                                          translation 0 0.075 0
+                                          rotation 1 0 0 1.57
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      USE FOOT
+                                    ]
+                                  }
+                                  USE JOINT
+                                ]
+                                name "left foot"
+                                physics Physics {
+                                  density -1
+                                  mass 1.25
+                                  centerOfMass [
+                                    0 0 0.02
+                                  ]
+                                  inertiaMatrix [
+                                    0.005 0.005 0.005
+                                    0 0 0
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      name "left shin"
+                      boundingObject USE SHIN
+                      physics Physics {
+                        density -1
+                        mass 3.5
+                        centerOfMass [
+                          0 -0.2 0
+                        ]
+                        inertiaMatrix [
+                          0.05 0.05 0.05
+                          0 0 0
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+              USE JOINT
+              USE THIGH
+            ]
+            name "left thigh"
+            boundingObject USE THIGH
+            physics Physics {
+              density -1
+              mass 8.5
+              centerOfMass [
+                0 -0.2 0
+              ]
+              inertiaMatrix [
+                0.15 0.15 0.15
+                0 0 0
+              ]
+            }
+          }
+        }
+      ]
+      name "left leg"
+      boundingObject Sphere {
+        radius 0.001
+      }
+      physics Physics {
+        density 1
+      }
+    }
+    DEF RIGHT_LEG Solid {
+      translation -0.08 -0.4 0
+      children [
+        DEF RIGHT_HIP Hinge2Joint {
+          jointParameters HingeJointParameters {
+          }
+          jointParameters2 JointParameters {
+          }
+          device [
+            PositionSensor {
+              name "HIP_RIGHT_POS"
+            }
+            RotationalMotor {
+              name "HIP_RIGHT"
+              maxVelocity 100
+              minPosition -3.1415
+              maxPosition 3.1415
+              maxTorque 200
+            }
+          ]
+          device2 [
+            PositionSensor {
+              name "HIPCOR_RIGHT_POS"
+            }
+            RotationalMotor {
+              name "HIPCOR_RIGHT"
+              maxTorque 200
+            }
+          ]
+          endPoint DEF RIGHT_THIGH Solid {
+            children [
+              Transform {
+                translation 0 -0.5 0
+                children [
+                  DEF RIGHT_KNEE HingeJoint {
+                    jointParameters HingeJointParameters {
+                    }
+                    device [
+                      RotationalMotor {
+                        name "KNEE_RIGHT"
+                        controlPID 100 0 0
+                        maxVelocity 100
+                        minPosition -3.1415
+                        maxPosition 3.1415
+                        maxTorque 200
+                      }
+                      PositionSensor {
+                        name "KNEE_RIGHT_POS"
+                      }
+                    ]
+                    endPoint DEF RIGHT_SHIN Solid {
+                      rotation 1 0 0 0
+                      children [
+                        USE JOINT
+                        USE SHIN
+                        Transform {
+                          translation 0 -0.5 0
+                          children [
+                            DEF RIGHT_ANKLE HingeJoint {
+                              jointParameters HingeJointParameters {
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "ANKLE_RIGHT"
+                                  controlPID 100 0 0
+                                  maxVelocity 100
+                                  minPosition -3.1415
+                                  maxPosition 3.1415
+                                  maxTorque 200
+                                }
+                                DEF ANKLE_RIGHT_POS PositionSensor {
+                                  name "ANKLE_RIGHT_POS"
+                                }
+                              ]
+                              endPoint DEF RIGHT_FOOT Solid {
+                                rotation -1 0 0 0.085
+                                children [
+                                  Transform {
+                                    translation 0 -0.075 0.06
+                                    rotation 1 0 0 1.57
+                                    children [
+                                      DEF SENSOR_HEEL_RIGHT TouchSensor {
+                                        name "SENSOR_HEEL_RIGHT"
+                                        boundingObject Transform {
+                                          translation 0 -0.075 0
+                                          rotation 1 0 0 0
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_HEEL_RIGHT2 TouchSensor {
+                                        translation 0 -0.15 0
+                                        rotation 1 0 0 3.14
+                                        name "SENSOR_HEEL_RIGHT2"
+                                        boundingObject Transform {
+                                          translation 0 -0.075 0
+                                          rotation 1 0 0 0
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_TOE_RIGHT TouchSensor {
+                                        rotation 1 0 0 0
+                                        name "SENSOR_TOE_RIGHT"
+                                        boundingObject Transform {
+                                          translation 0 0.075 0
+                                          rotation 1 0 0 1.57
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      DEF SENSOR_TOE_RIGHT2 TouchSensor {
+                                        translation 0 0.15 0
+                                        rotation 1 0 0 3.14
+                                        name "SENSOR_TOE_RIGHT2"
+                                        boundingObject Transform {
+                                          translation 0 0.075 0
+                                          rotation 1 0 0 1.57
+                                          children [
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                          density -1
+                                          mass 1e-8
+                                        }
+                                        type "force-3d"
+                                        lookupTable []
+                                      }
+                                      USE FOOT
+                                    ]
+                                  }
+                                  USE JOINT
+                                ]
+                                name "right foot"
+                                physics Physics {
+                                  density -1
+                                  mass 1.25
+                                  centerOfMass [
+                                    0 0 0.02
+                                  ]
+                                  inertiaMatrix [
+                                    0.005 0.005 0.005
+                                    0 0 0
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                      name "right shin"
+                      boundingObject USE SHIN
+                      physics Physics {
+                        density -1
+                        mass 3.5
+                        centerOfMass [
+                          0 -0.2 0
+                        ]
+                        inertiaMatrix [
+                          0.05 0.05 0.05
+                          0 0 0
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+              USE JOINT
+              USE THIGH
+            ]
+            name "right thigh"
+            boundingObject USE THIGH
+            physics Physics {
+              density -1
+              mass 8.5
+              centerOfMass [
+                0 -0.2 0
+              ]
+              inertiaMatrix [
+                0.15 0.15 0.15
+                0 0 0
+              ]
+            }
+          }
+        }
+      ]
+      name "right leg"
+      boundingObject Sphere {
+        radius 0.001
+      }
+      physics Physics {
+        density 1
+      }
+    }
+  ]
+  name "REGIS"
+  boundingObject DEF TRUNK Transform {
+    translation 0 -0.19 0
+    children [
+      DEF TRUNK Shape {
+        geometry Capsule {
+          height 0.4
+          radius 0.13
+        }
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 53.5
+    centerOfMass [
+      0 -0.05 0
+    ]
+    inertiaMatrix [
+      3 3 3
+      0 0 0
+    ]
+  }
+  controller "regis"
+  controllerArgs "3D.xml sample"
+}
+DEF GROUND Solid {
+  children [
+    DEF APPEARANCE_GROUND Transform {
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 1 1
+              transparency 0.01
+            }
+            texture ImageTexture {
+              url [
+                "textures/ground.jpg"
+              ]
+            }
+            textureTransform TextureTransform {
+              scale 100 300
+            }
+          }
+          geometry Plane {
+            size 100 231
+          }
+        }
+      ]
+    }
+  ]
+  name "GROUND"
+  boundingObject Plane {
+  }
+}
+DEF BRAIN Supervisor {
+  children [
+    Emitter {
+      channel 3
+    }
+    Receiver {
+      channel 2
+    }
+  ]
+  name "brain"
+  controller "regisBrainConnector_2DLearning"
+  controllerArgs "__BRAIN_CONNECTOR_PARAM__"
+
+}

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+if [[ -z $smlpath ]]
+then
+	path="/home/efx/Development/PHD/Airi/current/webots"
+else
+	path="$smlpath/current/webots"
+fi
+
+prefix="wavy2"
+
+conf="articleFrontier_$prefix"
+template="template_systematicHybridStudy3.xml"
+settings="current.xml"
+
+	echo "Extracting hybrid study on hybridA"
+	prefix="hybridA"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+
+	echo "Extracting hybrid study on hybridB"
+	prefix="hybridB"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+
+	echo "Extracting hybrid study on fblMinA"
+	prefix="fblMinA"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+
+	echo "Extracting hybrid study on fblMinB"
+	prefix="fblMinB"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+

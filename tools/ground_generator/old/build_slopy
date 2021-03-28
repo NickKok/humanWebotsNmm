@@ -1,0 +1,4 @@
+#!/bin/bash
+path=/home/efx/Development/PHD/LabImmersion/Ted
+
+./world_builder $path/global_tools/ground_generator/slopy_ground/slopy_ground_generator.py $path/global_tools/ground_generator/slopy_ground/

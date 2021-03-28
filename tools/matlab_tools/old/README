@@ -1,0 +1,5 @@
+conf.m 			: add the path to matlab workspace
+extract.m		: extract the signal and split it by cycle
+
+evaluation.m		: evaluate solution of robustness experiment (partI robustness)
+variability_study	: extract the signal of sensors and analyse their variability

@@ -1,0 +1,22 @@
+Intro
+=====
+
+Folder containing the data used for creating the optimization config file
+
+
+Naming convention
+-----------------
+
+The naming convention is as follow :
+
+	algorithmBranch
+
+The algorithm is in lowercase letter the first letter of the branch is in uppercase the rest in lowercase
+for example
+	
+	psoMaster2 :
+		algorithm : pso
+		branch : Master2
+
+### Note :
+The branch name should be specified in the job_manager.py script in tools/job_tools

@@ -1,0 +1,8 @@
+#!/bin/bash
+#for i in {1,6,10};
+for i in {1..10};
+do
+	echo "Systematic study of gait $i"
+	echo "    noise muscle study on feedback" `date`
+	webots_loadlib -s settings_systematic${i}_noiseMuscle_fdb.xml -c articleFrontier >/dev/null 2>&1
+done

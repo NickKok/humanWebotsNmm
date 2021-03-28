@@ -1,0 +1,6 @@
+#!/bin/bash
+set_path=$1
+what=$2
+value=$3
+echo "Overriding variable $what with value=$value"
+find $set_path | xargs perl -pi -e "s/\|$what\|/$value/g"

@@ -1,0 +1,17 @@
+#!/bin/bash
+speed=${1}
+if [[ $# -eq 0 ]]
+then
+	conf=
+else
+	conf="_${1}"
+fi
+path="/home/efx/Development/PHD/Airi"
+subpath="current/webots/conf_articleFrontier${conf}"
+for i in {1..8}; do
+	cp $path/$subpath/settings/settings_base.xml $path/$subpath/settings/settings.xml
+	find $path/$subpath/settings/settings.xml | xargs perl -pi -e "s/__VAL__/$i/g"
+	find $path/$subpath/settings/settings.xml | xargs perl -pi -e "s/__SPEED__/$speed/g"
+	echo "Running param $i"
+	webots_loadlib_fdb articleFrontier${conf}
+done;

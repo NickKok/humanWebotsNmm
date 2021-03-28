@@ -1,0 +1,15 @@
+Optimization details
+====================
+- Experiment : FBL
+- Initial population : OFF
+- Optimization with full muscle energy model
+- No steplength control
+
+
+	1	2	3	4	5
+0.8	x	x	x	x	x
+1.0	x	x	x	x	x
+1.2	x	x	x	x	x
+1.4	x	x	x	x	x
+1.6	x	x	x	x	x
+1.8	x	x	x	x	s

@@ -1,0 +1,35 @@
+Optimization details
+====================
+- Experiment : FBL
+- Initial population : ON (1.3)
+- Optimization with full muscle energy model
+- No steplength control
+- Torque soft limit minimization
+- Minimzation of sign changes in knee angle.
+- muscle noise (+)
+- steplengthcontrol (-)
+- no trunk_mean_angle (/)
+- no trunk_mean_angle + muscle noise (\)
+- steplengthcontrol + muscle noise (!)
+- steplengthcontrol rule : 0.4+0.8*x (') (changed rule : 0.8*(0.4+0.8*x), original rule : 0.46+0.8*x
+- range changed (*)
+- stage order changed (´)
+- initial population off ([)
+- stance based on hdist removed (`)
+
+	1	2	3	4	5	6	7	8	9	10	11	12
+0.8	+	x	-	-	-	-'	-'	-`*	-'*
+1.0	-'	-'	-'						|
+1.2	-'	-'	-'						|
+1.4									--> removed stage cmaes
+1.6	
+1.8	-`*	-`*	-`*	-`*
+		|	|	--> removed strong range limit
+		|	--> removed stage cmaes
+		--> changed range of hamhf_wl, deltas
+
+MEMO
+----
+
+If we optimize with CMAES for different speed in the same optimization process
+then we will find the local direction that maximizes the chance of finding different speed

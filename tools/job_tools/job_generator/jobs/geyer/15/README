@@ -1,0 +1,21 @@
+Optimization details
+====================
+- Experiment : FBL
+- Initial population : ON
+- Optimization with full muscle energy model
+- No steplength control
+- Torque soft limit minimization
+- Stage combined
+- mu = 4
+
+
+CMAES
+
+1.db :
+	random perturbation
+	speed = 1.3
+
+2.db :
+	wavy ground
+	speed = 1.3
+

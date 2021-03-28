@@ -1,0 +1,39 @@
+UNAME ?= $(shell uname)
+
+ifeq ($(UNAME),Darwin)
+webots_homes = /Applications/Webots
+else
+webots_homes = \
+        /usr/local/webots$(subst .,,$(webotsVersion)) \
+        /usr/local/webots-manager/$(webotsVersion)
+endif
+
+WEBOTS_HOME ?= $(word 1,$(wildcard $(webots_homes)))
+
+#$(error $(WEBOTS_HOME))
+
+
+ifeq ($(WEBOTS_HOME),)
+$(error Failed to find webots home is webots installed?)
+endif
+
+
+EXTRA_CFLAGS=-mmacosx-version-min=10.7 -arch i386 -arch x86_64
+
+MAIN_FOLDER ?= main
+
+ifeq ($(Optimization),"0")
+LIBRARIES=-lCppController -ldl `pkg-config` $(shell pkg-config --libs $(pkgs))
+CFLAGS=-O2 -std=gnu++0x $(shell pkg-config --cflags $(pkgs)) -I../../../../lib/
+else
+LIBRARIES=-lCppController -ldl `pkg-config --libs liboptimization-2.0` $(shell pkg-config --libs $(pkgs))
+CFLAGS=-O2 -std=gnu++0x `pkg-config --cflags $(pkgs)`  -I../../../../lib/ -I../sources/ -DOPTIMIZATION
+INCLUDE=`pkg-config --cflags $(pkgs)`
+endif
+#CC_SOURCES = $(wildcard ../sources/*.cc) ../$(MAIN_FOLDER)/main.cc
+CXX_SOURCES = $(wildcard ../sources/*.cc) ../$(MAIN_FOLDER)/main.cc
+
+#IF SOURCES HAVE NOT BEEN INSTALLED YOU CAN SPECIFY THE PATH TO THE LIBRARY AND HEADERS DIRECTLY 
+#AS SHOWN BELOW. CAN BE USED FOR MAC OSX Compatibilty
+#LIBRARIES=-lCppController -ldl -L/Users/emanueleformento/Documents/PhD/LowerLimbModel/libnmm/sml -lsml
+#CFLAGS=-O2 -std=gnu++0x -stdlib=libc++ -I../../../../lib/ -I/Users/emanueleformento/Documents/PhD/LowerLimbModel/libnmm/

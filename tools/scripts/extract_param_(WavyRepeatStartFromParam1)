@@ -1,0 +1,25 @@
+#!/bin/bash
+iterations=(11 4 7 7 9 10 10)
+particules=(12 21 11 27 16 19 24)
+
+size=${#particules[@]}
+
+echo $size
+i=0
+while true; do
+	if [ $i -gt $(($size-1)) ]
+	then
+		break
+	fi
+
+	n=$(($i+1))
+	pa=${particules[$i]}
+	it=${iterations[$i]}
+	extract2.py parameters -s -i $it -p $pa -f param1_wg$n.txt $1/pso_wavyInitDB_1.3.$n.db
+
+
+
+	i=$(($i+1))
+done
+
+#extract2.py parameters -s -i 11 -p 12 -f ../param1_wg1.txt biorobcn/serie13/perturbation/pso_wavyInitDB_1.3.1.db

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+path="/home/efx/Development/PHD/Airi/current/webots"
+prefix="wavy2"
+
+conf="articleFrontier_$prefix"
+template="template_systematicCombinaisonStudy.xml"
+settings="current.xml"
+
+for i in {1..10}
+do
+	echo "Extracting cpg fdb combinaison study on $i"
+	type="cpg"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+	find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|CPG\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+
+	echo "Extracting cst fdb combinaison study on $i"
+	type="cst"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+	find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|CPG\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+
+done

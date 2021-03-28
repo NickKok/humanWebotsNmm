@@ -1,0 +1,21 @@
+    <extension name="stage__OPTIMIZER__">
+<!--
+      <stage >distance</stage>
+      <stage condition="distance &gt; 10">1.3- abs(1.3 - speed)</stage>
+      <stage condition="abs(1.3 - speed) &lt; 0.07">-energy-10*energy_overextension</stage>
+-->
+      <stage>distance</stage>
+      <stage condition="distance &gt; 10.0">__DESIREDSPEED__- abs(__DESIREDSPEED__ - distance/duration)</stage>
+      <stage condition="abs(__DESIREDSPEED__ - distance/duration) &lt; 0.07">-energy/distance</stage>
+<!--
+      <stage while="distance &lt; 10">distance</stage>
+      <stage while="abs(__DESIREDSPEED__ - speed) &gt; 0.07">__DESIREDSPEED__- abs(__DESIREDSPEED__ - speed)</stage>
+      <stage>-energy/distance-10*energy_overextension/distance</stage>
+      <stage while="trunk_mean_angle &gt; 0.105">-trunk_mean_angle</stage>
+      <stage while="trunk_mean_angle &lt; 0.0">trunk_mean_angle</stage>
+      <stage while="angular_knee_velocity_change &gt; 10.0">-angular_knee_velocity_change</stage>
+      <stage while="steplengthSNR &lt; 5.0">steplengthSNR</stage>
+      <stage while="doublestance_duration/cycle &gt; 0.05">-doublestance_duration/cycle</stage>
+      <stage>distance-energy/distance/80-torque_sum/1000.0-10*abs(__DESIREDSPEED__ -distance/duration)</stage>
+-->
+    </extension>

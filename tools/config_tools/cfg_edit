@@ -1,0 +1,53 @@
+#!/bin/bash
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script launch a sml version running on webots
+
+OPTIONS:
+   -h      Show this message
+   -s      Edit settings
+   -c      Edit cpg
+   -p      Config folder prefix
+EOF
+}
+
+SETTING=
+CONFIG=
+CPG=
+while getopts “:h:s:c:p:” OPTION
+do
+     case $OPTION in
+         h)
+             usage
+             exit 1
+             ;;
+         s)
+             SETTING=$OPTARG
+             ;;
+         c)
+             CPG=$OPTARG
+             ;;
+         p)
+             if [[ -z $OPTARG ]]; then
+		CONFIG=
+             else
+                CONFIG="_$OPTARG"
+	     fi
+             ;;
+         ?)
+             exit
+             ;;
+     esac
+done
+folder=/home/efx/Development/PHD/Airi/current/webots
+
+if ! [[ -z $SETTING ]];then
+	nano -w $folder/conf$CONFIG/settings/$SETTING
+fi
+
+if ! [[ -z $CPG ]];then
+	kwrite $folder/conf$CONFIG/cpg_gate/$CPG
+fi

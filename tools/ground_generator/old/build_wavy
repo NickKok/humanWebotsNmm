@@ -1,0 +1,4 @@
+#!/bin/bash
+path=/home/dzeladin/Development/sml/
+
+./world_builder $path/tools/ground_generator/wavy_ground/wavy_ground_generator.py $path/global_tools/ground_generator/wavy_ground/

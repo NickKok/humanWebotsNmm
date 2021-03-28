@@ -1,0 +1,6 @@
+#!/bin/bash
+path=/home/efx/Development/
+SCRIPT=$(readlink -f $0)
+SCRIPTPATH=`dirname $SCRIPT`
+#$SCRIPTPATH/world_builder $SCRIPTPATH/slopy_ground/slopy_ground_generator.py ${1} $SCRIPTPATH
+$SCRIPTPATH/world_builder $SCRIPTPATH/wavy_ground/wavy_ground_generator.py ${1} $SCRIPTPATH

@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "0 : to edit settings.xml"
+echo "1 : to edit settings_cpg.xml"
+echo "(default) 0";
+val=$1
+if [[ -z val ]]; then
+   option=
+else
+   option="-p $1"
+fi
+what=0
+read what
+if [[ what -eq 1 ]]; then
+cfg_edit -s settings_cpg.xml $option
+fi
+if [[ what -eq 0 ]]; then
+cfg_edit -s settings.xml $option
+fi

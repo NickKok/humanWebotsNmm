@@ -1,0 +1,40 @@
+#!/bin/bash
+
+path="/home/efx/Development/PHD/Airi/current/webots"
+prefix="wavy2"
+
+conf="articleFrontier_$prefix"
+template="template_systematicNoiseStudy.xml"
+settings="current.xml"
+
+
+
+
+for i in {1..10}
+do
+	echo "Extracting noise muscles study on $i"
+	type="noiseMuscleStudy"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+	find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	find $set_path | xargs perl -pi -e "s/\|NOISE_SENSOR\|/0/g"
+	find $set_path | xargs perl -pi -e "s/\|NOISE_MUSCLE\|/1/g"
+	webots_loadlib -s $settings -c $conf
+
+	echo "Extracting noise sensors study on $i"
+	type="noiseSensorStudy"
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+	find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+	find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+	find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+	find $set_path | xargs perl -pi -e "s/\|NOISE_SENSOR\|/1/g"
+	find $set_path | xargs perl -pi -e "s/\|NOISE_MUSCLE\|/0/g"
+	webots_loadlib -s $settings -c $conf
+
+
+done

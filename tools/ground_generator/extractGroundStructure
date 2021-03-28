@@ -1,0 +1,64 @@
+#!/bin/bash
+
+if [ ${#@} -eq 0 ]
+then
+    echo "error: 1 argument needed"
+    exit 1
+fi
+
+
+A=`find $1 | xargs pcregrep -M '(.*)\n(.*)geometry DEF GWAVE([^}]*)\n'`
+B=`find $1 | xargs pcregrep -M '(.*)\n(.*)DEF WAVE([^c]*)\n'`
+val=0
+wave=();
+height=();
+start=();
+pos=-1;
+while read -r line; do
+if [[ $line == *translation* ]] ; then
+    pos=`expr $pos + 1`;
+    IFS=' ' read -ra all <<< "$line"
+    translation[$pos]=${all[`expr ${#all[*]} - 1`]}
+fi
+done <<< "$B"
+wave_number=0;
+while read -r line; do
+    pos=`expr $wave_number - 1`;
+    if [[ $val == 1 ]] ; then
+        val=0
+        IFS=',' read -ra all <<< "$line"
+        height[$pos]=${all[2]}
+    fi
+    if [[ $line == *height* ]] ; then
+        val=1
+    fi
+    
+    if [[ $line == *zSpacing* ]] ; then
+        IFS=' ' read -ra all <<< "$line"
+        length[$pos]=${all[`expr ${#all[*]} - 1`]}
+        wave_length[$pos]=$(echo "${length[$pos]} * ${wave_dimension[$pos]}" | bc)
+    fi
+    if [[ $line == *zDimension* ]] ; then
+        IFS=' ' read -ra all <<< "$line"
+        wave_dimension[$pos]=$((${all[`expr ${#all[*]} - 1`]} - 1))
+    fi
+    
+    if [[ $line == *geometry* ]] ; then
+        wave_number=`expr $wave_number + 1`
+#        echo "wavy number $wave_number"
+    fi
+    
+done <<< "$A"
+
+i=0
+echo "#num start height length dim"
+while true; do
+echo $i ${translation[$i]} ${height[$i]} ${wave_length[$i]} ${wave_dimension[$i]}
+   if [ $i -gt $((${#height[*]} - 2)) ]; then
+        break
+   fi;
+   i=$(($i + 1))
+   
+   
+   
+done

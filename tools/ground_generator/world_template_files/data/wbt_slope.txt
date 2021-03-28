@@ -1,0 +1,32 @@
+DEF WAVE__WAVE_NUMBER_____REPEAT_NUMBER__ Solid {
+  name "WAVE__WAVE_NUMBER_____REPEAT_NUMBER__"
+  translation __REPEATN__ 0 __STARTINGPOS__
+  children [
+    Shape {
+      appearance Appearance {
+        material Material {
+        }
+        texture ImageTexture {
+          url [
+            "textures/ground.jpg"
+          ]
+        }
+        textureTransform TextureTransform {
+          rotation 1.571
+          scale 10 18
+        }
+      }
+      geometry DEF GWAVE__WAVE_NUMBER_____REPEAT_NUMBER__  ElevationGrid{
+        height [
+          __BASALHEIGHT__, __BASALHEIGHT__, __HEIGHT__, __HEIGHT__
+        ]
+        xDimension 2
+        xSpacing __WIDTH__
+        zDimension 2
+        zSpacing __LENGTH__
+        thickness 0
+      }
+    }
+  ]
+  boundingObject USE GWAVE__WAVE_NUMBER_____REPEAT_NUMBER__
+}

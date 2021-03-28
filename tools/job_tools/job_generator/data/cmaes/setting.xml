@@ -1,0 +1,15 @@
+    <setting name="max-iterations">__MAXITERATIONS__</setting>
+    <setting name="initial-population-noise">0</setting>
+
+__INITIALPOPULATION_START__
+    <setting name="initial-population">data/db/__INITDBNAME__</setting>
+    <setting name="initial-population-noise">0.0</setting>
+__INITIALPOPULATION_END__
+    <setting name="lambda">__POPULATIONSIZE__</setting>
+    <setting name="mu">3</setting>
+    <setting name="initialStd">0.35*(50.0/3.0)</setting>
+
+__MULTIPLERUN_START__
+    <setting name="repeat-task">5</setting>
+    <setting name="repeat-task-combine">Minimum</setting>
+__MULTIPLERUN_END__

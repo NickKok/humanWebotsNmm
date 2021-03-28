@@ -1,0 +1,29 @@
+      <fitness>
+        <expression>distance-10*abs(desired_duration-duration))-abs(desired_energy-energy)/1000-abs(torque_sum/1000)</expression>
+            <variable name="energy/distance">energy/distance</variable>
+            <variable name="energy/time">energy/duration</variable>
+	    <variable name="distance">distance</variable>
+            <variable name="duration">duration</variable>
+            <variable name="energy">energy</variable>
+            <variable name="energy_overextension">energy_overextension</variable>
+            <variable name="fall">fall</variable>
+            <variable name="cycle">cycle</variable>
+            <variable name="speed">speed</variable>
+            <!--<variable name="angular_knee_velocity_change">angular_knee_velocity_change</variable>-->
+            <variable name="steadyState_reachedAt">steadyState_reachedAt</variable>
+            <variable name="duration">duration</variable>
+            <variable name="muscle_activity_noise">muscle_activity_noise</variable>
+            <variable name="sensors_activity_noise">sensors_activity_noise</variable>
+            <variable name="interneurons_activity_noise">interneurons_activity_noise</variable>
+            <variable name="last_acceleration">last_acceleration</variable>
+            <variable name="last_speed">last_speed</variable>
+            <variable name="doublestance_duration">doublestance_duration</variable>
+            <variable name="left_golden_ratio0">left_golden_ratio0</variable>
+            <variable name="left_golden_ratio1">left_golden_ratio1</variable>
+            <variable name="left_golden_ratio2">left_golden_ratio2</variable>
+            <variable name="right_golden_ratio0">right_golden_ratio0</variable>
+            <variable name="right_golden_ratio1">right_golden_ratio1</variable>
+            <variable name="right_golden_ratio2">right_golden_ratio2</variable>
+            <variable name="doublestance_duration">doublestance_duration</variable>
+      </fitness>
+

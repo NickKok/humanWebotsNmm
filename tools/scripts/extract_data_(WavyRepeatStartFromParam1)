@@ -1,0 +1,33 @@
+#!/bin/bash
+
+
+config="articleFrontier_1.3"
+path="/home/efx/Development/PHD/Airi/current/webots/conf_$config/settings"
+template="template_extractor.xml"
+setting="extractor.xml"
+
+
+size=7
+i=0
+start=13
+while true; do
+	if [ $i -gt $(($size-1)) ]
+	then
+		break
+	fi
+	n=$(($i+1))
+	
+	num=$(($start+$i))
+	cp $path/$template $path/$setting
+	find $path/$setting | xargs perl -pi -e "s/__PARAM__/1_Wavy$n/g"
+	find $path/$setting | xargs perl -pi -e "s/__NUM__/$num/g"
+	find $path/$setting | xargs perl -pi -e "s/__SPEED__/1.3/g"
+
+	echo "webots_loadlib -s $setting -c $config"
+	webots_loadlib -s $setting -c $config
+
+
+
+	i=$(($i+1))
+done
+

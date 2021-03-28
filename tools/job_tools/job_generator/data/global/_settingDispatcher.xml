@@ -1,0 +1,30 @@
+    <setting name="webotsVersion">__WEBOTSVERSION_DOT__</setting>
+__WORLD_START__
+    <setting name="world">__SMLPATH__/controller_current/webots/worlds/__WEBOTSVERSION__.wbt</setting>
+__WORLD_END__
+__WORLD_BUILDER_START__
+    <setting name="worldBuilderPath">__SMLPATH__/controller_current/webots_tools/world_builder</setting>
+__WORLD_BUILDER_END__
+    <setting name="mode">batch</setting>
+    <setting name="distance_max">__MAXDISTANCE__</setting>
+    <setting name="duration_max">__MAXDURATION__</setting>
+    <setting name="rescale_parameters">0</setting>
+    <setting name="muscle_activation_noise">0</setting>
+    <setting name="launching_gate">__LAUNCHINGGATE__</setting>
+    <setting name="experiment">__PHASESDESCRIPTOR__</setting>
+<!--
+    <setting name="webotsPath">/usr/local/webots__WEBOTSVERSION__/webots</setting>
+    <setting name="webotsPath">__HOMEPATH__.local/usr/bin/webots_loadlib /usr/local/webots__WEBOTSVERSION__/webots __LIBSMLPATH__ </setting>
+-->
+    <setting name="webotsPath">__HOMEPATH__.local/usr/bin/webots8_loadlib</setting>
+    <setting name="gitbranch">__GITBRANCH__</setting>
+    <setting name="optimizer">__OPTIMIZER__</setting>
+<!--
+	GENERAL LIBNMM SETTINGS
+-->
+    <setting name="config">../../conf_sample/</setting>
+    <setting name="jWang_changes">0</setting>
+    <setting name="transfer_function">0</setting>
+    <setting name="muscle_step_number">1</setting>
+    <setting name="notf_trunklean">0</setting>
+    <setting name="delay">1</setting>

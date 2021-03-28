@@ -1,0 +1,86 @@
+      <!--
+	      Muscle FORCE FEEDBACK
+	      ******************
+      -->
+      <parameter name="solsol_wf" min="0.8" max="2.5" min-initial="1.5" max-initial="1.6"/>
+      <parameter name="solta_wf" min="0.1" max="0.9" min-initial="0.35" max-initial="0.45"/>
+      <parameter name="gasgas_wf" min="0.3" max="1.6" min-initial="0.3" max-initial="0.4"/>
+      <parameter name="vasvas_wf" min="0.8" max="2.5" min-initial="1.55" max-initial="1.75"/>
+      <parameter name="hamham_wf" min="0.2" max="1.0" min-initial="0.2" max-initial="0.3"/>
+      <parameter name="gluglu_wf" min="0.2" max="0.85" min-initial="0.45" max-initial="0.55"/>
+      <!--
+	      Muscle LENGTH FEEDBACK
+	      ******************
+      -->
+      <parameter name="tata_wl_sw" min="1.0" max="3.0" min-initial="1.85" max-initial="1.95"/>
+      <parameter name="tata_wl_st" min="1.0" max="3.0" min-initial="1.85" max-initial="1.95"/>
+      <parameter name="hfhf_wl" min="0.2" max="1.5" min-initial="1.4" max-initial="1.5"/>
+      <parameter name="hamhf_wl" min="0.0" max="3.0" min-initial="1.6" max-initial="1.7"/>
+      <parameter name="ta_bl_sw" min="0.0" max="1.0" min-initial="0.745" max-initial="0.755"/>
+      <parameter name="ta_bl_st" min="0.0" max="1.5" min-initial="0.745" max-initial="0.755"/>
+      <parameter name="hf_bl" min="0.2" max="1.0" min-initial="0.8" max-initial="0.85"/>
+      <parameter name="ham_bl" min="0.4" max="1.5" min-initial="0.76" max-initial="0.87"/>
+
+      <!--
+	      STANCE PHASE PD
+	      ******************
+      -->
+          <parameter name="kbodyweight" min="0.8" max="2.4" min-initial="1.24" max-initial="1.25"/>
+	  <parameter name="kp" min="1.5" max="3.0" min-initial="2.295" max-initial="2.315"/>
+	  <parameter name="kd" min="0.15" max="2.6" min-initial="0.5" max-initial="0.6"/>
+          <parameter name="kref" min="0.0" max="0.3"  min-initial="0.1" max-initial="0.105"/>
+      <!--
+	      SWING_END PHASE PD
+	      ******************
+      -->
+      <parameter name="hipkp_hf" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="hipkd_hf" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+
+      <parameter name="hipkp_glu" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="hipkd_glu" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+
+      <parameter name="kref_hip" min="-3.14" max="0.0" min-initial="-0.342" max-initial="-0.341"/>
+
+      <parameter name="kneekp_vas" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="kneekd_vas" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+      <parameter name="kref_knee" min="0.0" max="1.14" min-initial="0.141" max-initial="0.142"/>
+      <!--
+		      STANCE_END CST
+		      ******************
+      -->
+      <parameter name="deltas_vas" min="0.0" max="1.15"  min-initial="0.95" max-initial="1.05"/>
+      <parameter name="deltas_glu" min="0.0" max="1.0"  min-initial="0.225" max-initial="0.275"/>
+      <parameter name="deltas_hf" min="0.0" max="1.0"  min-initial="0.225" max-initial="0.275"/>-->
+      <!--
+		      BASAL MUSCLE ACTIVITY
+		      ******************
+      -->
+      <parameter name="sol_stance_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="sol_swing_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="ta_stance_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="ta_swing_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="gas_stance_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="gas_swing_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="vas_stance_activitybasal" min="0.01" max="0.15" min-initial="0.08" max-initial="0.085"/>
+      <parameter name="vas_swing_activitybasal" min="0.01" max="0.1" min-initial="0.08" max-initial="0.085"/>
+      <parameter name="ham_stance_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="ham_swing_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="glu_stance_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="glu_swing_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="hf_stance_activitybasal" min="0.01" max="0.15" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="hf_swing_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+
+      <!--
+		      STANC SWING PREPARATION
+		      ******************
+      -->
+      <parameter name="stance_end" min="0.0" max="3.0" min-initial="0.3" max-initial="0.5"/>
+	  <parameter name="swing_end" min="-2.5" max="-0.0" min-initial="-0.175" max-initial="-0.125"/>
+		  
+      <!--
+      <parameter name="stance_end" min="0.0" max="3.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="swing_end" min="-2.5" max="-0.0" min-initial="-0.55" max-initial="-0.45"/>
+      -->
+      <parameter name="kphiknee" min="0.0" max="3" min-initial="1.95" max-initial="2.05"/>
+      <parameter name="kphiknee_off" min="0" max="3.14" min-initial="2.97" max-initial="2.9705"/>
+      <parameter name="klean" min="0.0" max="2" min-initial="0.785" max-initial="0.825"/>

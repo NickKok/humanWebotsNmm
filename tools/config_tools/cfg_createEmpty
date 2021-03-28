@@ -1,0 +1,10 @@
+#!/bin/bash
+mkdir $1
+mkdir $1/launching_gate
+mkdir $1/cpg_gate
+mkdir $1/cpg_gate/cpg_interneurons
+mkdir $1/cpg_gate/cpg_data
+mkdir $1/systematic_search
+mkdir $1/settings
+mkdir $1/fullReflex_gate
+mkdir $1/motor_primitives

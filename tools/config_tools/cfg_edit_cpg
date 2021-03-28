@@ -1,0 +1,2 @@
+#!/bin/bash
+cfg_edit -c cpg_interneurons.txt -p $1

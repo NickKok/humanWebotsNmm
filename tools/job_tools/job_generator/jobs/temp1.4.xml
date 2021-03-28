@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<job name="pso_1.4">
+<timeout>120</timeout>
+<priority>10</priority>
+<token>f2a35dde2993316e47ff6fbb68cfd42e</token>
+<!--<asynchronous-storage/>-->
+  <optimizer name="pso">
+    <setting name="max-velocity">0.3</setting>
+    <setting name="coginitive-factor">2.05</setting>
+    <setting name="social-factor">2.05</setting>
+    <setting name="constriction">0.729</setting>
+    <setting name="boundary-condition">Bounce</setting>
+    <setting name="boundary-damping">0.95</setting>
+    <setting name="max-iterations">100</setting>
+    <setting name="population-size">20</setting>
+    <setting name="convergence-threshold">0</setting>
+    <setting name="convergence-window">10</setting>
+    <setting name="min-iterations">20</setting>
+    <setting name="initial-population-noise">0</setting>
+<!--    <setting name="repeat-task">5</setting>
+    <setting name="repeat-task-combine">Minimum</setting>
+-->
+    <parameters>
+      <!--
+	      Muscle FORCE FEEDBACK
+	      ******************
+      -->
+      <parameter name="solsol_wf" min="0.8" max="1.6" min-initial="1.5" max-initial="1.6"/>
+      <parameter name="solta_wf" min="0.1" max="0.8" min-initial="0.35" max-initial="0.45"/>
+      <parameter name="gasgas_wf" min="0.3" max="1.6" min-initial="0.3" max-initial="0.4"/>
+      <parameter name="vasvas_wf" min="0.95" max="1.8" min-initial="1.55" max-initial="1.75"/>
+      <parameter name="hamham_wf" min="0.2" max="1.0" min-initial="0.2" max-initial="0.3"/>
+      <parameter name="gluglu_wf" min="0.2" max="0.85" min-initial="0.45" max-initial="0.55"/>
+      <!--
+	      Muscle LENGTH FEEDBACK
+	      ******************
+      -->
+      <parameter name="tata_wl" min="1.0" max="3.0" min-initial="1.85" max-initial="1.95"/>
+      <parameter name="hfhf_wl" min="0.2" max="1.5" min-initial="1.4" max-initial="1.5"/>
+      <parameter name="hamhf_wl" min="0.0" max="3.0" min-initial="1.6" max-initial="1.7"/>
+      <parameter name="ta_bl" min="0.0" max="1.0" min-initial="0.745" max-initial="0.755"/>
+      <parameter name="hf_bl" min="0.2" max="1.0" min-initial="0.8" max-initial="0.85"/>
+      <parameter name="ham_bl" min="0.7" max="1.0" min-initial="0.76" max-initial="0.77"/>
+
+      <!--
+	      STANCE PHASE PD
+	      ******************
+      -->
+          <parameter name="kbodyweight" min="0.8" max="1.4" min-initial="1.24" max-initial="1.25"/>
+	  <parameter name="kp" min="1.5" max="3.0" min-initial="2.295" max-initial="2.315"/>
+	  <parameter name="kd" min="0.15" max="0.6" min-initial="0.5" max-initial="0.6"/>
+          <parameter name="kref" min="0.0" max="0.3"  min-initial="0.1" max-initial="0.105"/>
+      <!--
+	      SWING_END PHASE PD
+	      ******************
+      -->
+      <parameter name="hipkp_hf" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="hipkd_hf" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+
+      <parameter name="hipkp_glu" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="hipkd_glu" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+
+      <parameter name="kref_hip" min="-3.14" max="0.0" min-initial="-0.342" max-initial="-0.341"/>
+
+      <parameter name="kneekp_vas" min="0.0" max="2.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="kneekd_vas" min="0.0" max="1.0" min-initial="0.195" max-initial="0.205"/>
+      <parameter name="kref_knee" min="0.0" max="1.14" min-initial="0.141" max-initial="0.142"/>
+      <!--
+		      STANCE_END CST
+		      ******************
+      -->
+      <parameter name="deltas" min="0.0" max="1.05"  min-initial="0.95" max-initial="1.05"/>
+      <!--<parameter name="deltas_glu" min="0.0" max="1.0"  min-initial="0.225" max-initial="0.275"/>
+	  <parameter name="deltas_hf" min="0.0" max="1.0"  min-initial="0.225" max-initial="0.275"/>-->
+      <!--
+		      BASAL MUSCLE ACTIVITY
+		      ******************
+      -->
+      <parameter name="sol_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="ta_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="gas_activitybasal" min="0.01" max="0.1" min-initial="0.01" max-initial="0.015"/>
+      <parameter name="vas_activitybasal" min="0.01" max="0.1" min-initial="0.08" max-initial="0.085"/>
+      <parameter name="ham_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="glu_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+      <parameter name="hf_activitybasal" min="0.01" max="0.1" min-initial="0.05" max-initial="0.055"/>
+
+      <!--
+		      STANC SWING PREPARATION
+		      ******************
+      -->
+      <parameter name="stance_end" min="0.0" max="3.0" min-initial="0.3" max-initial="0.5"/>
+      <parameter name="swing_end" min="-2.5" max="-0.0" min-initial="-0.175" max-initial="-0.125"/>
+      <!--
+      <parameter name="stance_end" min="0.0" max="3.0" min-initial="0.95" max-initial="1.05"/>
+      <parameter name="swing_end" min="-2.5" max="-0.0" min-initial="-0.55" max-initial="-0.45"/>
+      -->
+      <parameter name="kphiknee" min="0.0" max="3" min-initial="1.95" max-initial="2.05"/>
+      <parameter name="kphiknee_off" min="0" max="3.14" min-initial="2.97" max-initial="2.9705"/>
+      <parameter name="klean" min="0.0" max="2" min-initial="0.785" max-initial="0.825"/>
+
+    </parameters>
+    <fitness>
+	<expression>distance-10*abs(desired_duration-duration))-abs(desired_energy-energy)/1000</expression>
+                <variable name="corr">8*(human_ankle_correlation+human_knee_correlation+human_hip_correlation)</variable>
+                <variable name="desired_speed">1.4</variable>
+                <variable name="desired_duration">distance_max/(desired_speed+0.001)</variable>
+                <variable name="distance_max">50</variable>
+                <variable name="actual_speed">distance/(duration+0.001)</variable>
+                <variable name="actual_steplength">distance/(cycle+0.001)/2</variable>
+                <variable name="desired_energy">3000</variable>
+                <variable name="desired_steplength">0.72</variable>
+      </fitness>
+  </optimizer>
+  <extensions>
+    <extension name="stagepso">
+      <stage>distance</stage>
+      <stage condition="distance &gt; 10.0">-trunk_mean_angle</stage>
+      <stage condition="trunk_mean_angle &lt; 0.105">trunk_mean_angle</stage>
+      <stage condition="trunk_mean_angle &gt; 0.0">distance</stage>
+	  <stage condition="distance &gt; 35-0.1">1.4- abs(1.4 -distance/duration)</stage>
+      <stage condition="abs(1.4 - distance/duration) &lt; 0.07">-energy/1000 + steplengthSNR</stage>
+    </extension>
+  </extensions>
+  <dispatcher name="webots">
+    <setting name="world">/home/dzeladin/Development/sml/current/webots/worlds/base644.wbt</setting>
+    <setting name="mode">batch</setting>
+    <setting name="distance_max">35</setting>
+    <setting name="rescale_parameters">0</setting>
+    <setting name="muscle_activation_noise">0</setting>
+    <setting name="launching_gate">1.4</setting>
+	<setting name="experiment">fullReflex+5</setting>
+    <setting name="webotsPath">/usr/local/webots644/webots</setting>
+  </dispatcher>
+</job>
+

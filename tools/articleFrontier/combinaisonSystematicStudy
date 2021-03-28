@@ -1,0 +1,18 @@
+#!/bin/bash
+#for i in {1,6,10};
+#for i in {3..8}
+for i in {4,1}
+do
+	echo "Systematic study of gait $i"
+	echo "    cpg combinaison study, started at: " `date`
+	webots_loadlib -s settings_systematic${i}_cpg.xml -c articleFrontier >/dev/null 2>&1
+done
+
+
+#for i in {10,9,5,3}
+#do
+#	echo "Systematic study of gait $i"
+#	echo "    cst combinaison study, started at: " `date`
+#	webots_loadlib -s settings_systematic${i}_cst.xml -c articleFrontier >/dev/null 2>&1
+#done
+

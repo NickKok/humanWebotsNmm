@@ -1,0 +1,55 @@
+Optimization details
+====================
+- Experiment : FBL
+- Initial population : ON
+- Optimization with full muscle energy model
+- No steplength control
+- Torque soft limit minimization
+- Stage combined
+- mu = 4
+
+
+CMAES
+1:
+	maximal speed
+	last stage : only speed
+2:
+	maximal speed
+	last stage : combinaison
+
+3:
+	minimal speed
+	last stage : only speed
+4:
+	minimal speed
+	last stage : combinaison
+5:
+	no speed constraints 
+	energy/distance minimization
+6:
+	no speed constraints
+	energy/distance minimization
+	initial gait geyer range
+7:
+	maximal speed
+	last stage : combinaison
+	first stage : 34.9 meters
+
+8:
+	no speed constraints
+	no initial population
+	wavy ground
+	
+
+9:
+	maximal speed
+	last stage : combinaison (decrease speed weights)
+	first stage : 34.9 meters
+
+CMAMS
+10:
+	minimal speed
+11:
+	maximal speed
+12:
+	maximal changes from 1.3 m/s

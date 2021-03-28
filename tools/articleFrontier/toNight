@@ -1,0 +1,31 @@
+#!/bin/bash
+function get_num(){
+	repeatNumber=0
+	while [ true ]
+	do
+		repeatNumber=`expr $repeatNumber + 1`
+		if [[ -z `find $systematicsearch_data | grep $1 | grep repeat${repeatNumber}` ]]
+		then
+			break
+		fi
+	done
+}
+
+systematicsearch_data="/home/efx/Development/PHD/Airi/current/systematicsearch_data"
+
+
+echo "#########################"
+echo "### NOISE SYSTEMATIC ####"
+echo "#########################"
+for i in {1..10}
+do
+	# NOISE MUSCLE #
+	################
+	./noiseMuscleSystematicStudy
+	get_num "noiseMax0.05"
+	for j in `find $systematicsearch_data | grep noiseMuscle | grep noiseMax0.05 | grep -v 'repeat'`
+	do
+		mv $j ${j}_repeat${repeatNumber}
+	done
+
+done

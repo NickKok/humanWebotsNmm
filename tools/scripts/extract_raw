@@ -1,0 +1,18 @@
+#!/bin/bash
+
+path="/home/efx/Development/PHD/Airi/current/webots"
+prefix="wavy2"
+
+conf="articleFrontier_$prefix"
+template="template_extractRaw.xml"
+settings="current.xml"
+
+for i in {1..10}
+do
+	set_path=$path/conf_$conf/settings/$settings
+	cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+	find $set_path | xargs perl -pi -e "s/__CONF__/$conf/g"
+	find $set_path | xargs perl -pi -e "s/__VAL__/$i/g"
+	find $set_path | xargs perl -pi -e "s/__PREFIX__/$prefix/g"
+	webots_loadlib -s $settings -c $conf
+done

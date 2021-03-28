@@ -1,0 +1,467 @@
+#VRML_SIM V6.0 utf8
+WorldInfo {
+  info [
+    "Description"
+    "Author: first name last name <e-mail>"
+    "Date: DD MMM YYYY"
+  ]
+  physics "no_lift"
+  basicTimeStep 1
+  displayRefresh 40
+  runRealTime TRUE
+  contactProperties [
+    DEF CONTACT ContactProperties {
+    }
+  ]
+}
+Viewpoint {
+  orientation 0 -1 0 1.57
+  position -6.54333 1.2 0
+}
+Background {
+  skyColor [
+    0.658824 0.827451 1
+  ]
+}
+DirectionalLight {
+  direction 0 -1 1
+  castShadows TRUE
+}
+DirectionalLight {
+}
+DEF REGIS Supervisor {
+  translation 0 1.53 0
+  rotation 1 0 0 0.2
+  children [
+    DEF TRUNK_APPEARANCE Transform {
+      translation 0 -0.19 0
+      children [
+        DEF TRUNK Shape {
+          geometry Capsule {
+            height 0.4
+            radius 0.13
+          }
+        }
+      ]
+    }
+    DEF EMITTER Emitter {
+      name "EMITTER"
+    }
+    DEF RECEIVER Receiver {
+      name "RECEIVER"
+      channel 1
+    }
+    DEF HIP_LEFT Servo {
+      translation 0.08 -0.4 0
+      rotation 1 0 0 0
+      children [
+        DEF KNEE_LEFT Servo {
+          translation 0 -0.5 0
+          rotation 1 0 0 0
+          children [
+            DEF ANKLE_LEFT Servo {
+              translation 0 -0.5 0
+              rotation 1 0 0 0
+              children [
+                DEF FOOT_LEFT_APPEARANCE Transform {
+                  translation 0 -0.075 0.06
+                  rotation 1 0 0 1.57
+                  children [
+                    Shape {
+                      geometry Capsule {
+                        height 0.16
+                        radius 0.05
+                      }
+                    }
+                  ]
+                }
+                DEF SENSOR_HEEL_LEFT TouchSensor {
+                  name "SENSOR_HEEL_LEFT"
+                  boundingObject Transform {
+                    translation 0 -0.075 -0.015
+                    rotation 1 0 0 1.57
+                    children [
+                      Sphere {
+                        radius 0.05
+                      }
+                    ]
+                  }
+                  physics Physics {
+                    density -1
+                    mass 1e-08
+                  }
+                  type "force-3d"
+                  lookupTable [
+                  ]
+                }
+                DEF SENSOR_TOE_LEFT TouchSensor {
+                  name "SENSOR_TOE_LEFT"
+                  boundingObject Transform {
+                    translation 0 -0.075 0.135
+                    rotation 1 0 0 1.57
+                    children [
+                      Sphere {
+                        radius 0.05
+                      }
+                    ]
+                  }
+                  physics Physics {
+                    density -1
+                    mass 1e-08
+                  }
+                  type "force-3d"
+                  lookupTable [
+                  ]
+                }
+                DEF APPEARANCE_ANKLE_LEFT Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0 1
+                    }
+                  }
+                  geometry Sphere {
+                    radius 0.05
+                  }
+                }
+              ]
+              name "ANKLE_LEFT"
+              boundingObject DEF FOOT_LEFT Transform {
+                rotation 1 0 0 1.57
+                children [
+                  Sphere {
+                    radius 0.05
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 1.25
+                centerOfMass 0 0 0.02
+                inertiaMatrix [
+                  0.005, 0.005, 0.005, 0, 0, 0
+                ]
+              }
+              maxVelocity 10000
+              maxForce 10000
+              position -0.085
+              minStop -0.2618
+              maxStop 0.7854
+            }
+            DEF SHIN_LEFT Transform {
+              translation 0 -0.25 0
+              children [
+                DEF APPEARANCE_SHIN_LEFT Shape {
+                  geometry Capsule {
+                    height 0.35
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+            DEF APPEARANCE_KNEE_LEFT Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 1
+                }
+              }
+              geometry Sphere {
+                radius 0.06
+              }
+            }
+          ]
+          name "KNEE_LEFT"
+          boundingObject Sphere {
+            radius 0.06
+          }
+          physics Physics {
+            density -1
+            mass 3.5
+            centerOfMass 0 -0.2 0
+            inertiaMatrix [
+              0.05, 0.05, 0.05, 0, 0, 0
+            ]
+          }
+          maxVelocity 10000
+          maxForce 10000
+          position 0.17
+          minStop -0.222
+          maxStop 2
+        }
+        DEF THIGH_LEFT Transform {
+          translation 0 -0.25 0
+          children [
+            DEF APPEARANCE_THIGH_LEFT Shape {
+              geometry Capsule {
+                height 0.35
+                radius 0.08
+              }
+            }
+          ]
+        }
+        DEF APPEARANCE_HIP_LEFT Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 1
+            }
+          }
+          geometry Sphere {
+            radius 0.07
+          }
+        }
+      ]
+      name "HIP_LEFT"
+      boundingObject Sphere {
+        radius 0.07
+      }
+      physics Physics {
+        density -1
+        mass 8.5
+        centerOfMass 0 -0.2 0
+        inertiaMatrix [
+          0.15, 0.15, 0.15, 0, 0, 0
+        ]
+      }
+      maxVelocity 10000
+      maxForce 10000
+      position -0.1
+      minStop -2
+      maxStop 2
+    }
+    DEF HIP_RIGHT Servo {
+      translation -0.08 -0.4 0
+      rotation 1 0 0 0
+      children [
+        DEF KNEE_RIGHT Servo {
+          translation 0 -0.5 0
+          rotation 1 0 0 0
+          children [
+            DEF ANKLE_RIGHT Servo {
+              translation 0 -0.5 0
+              rotation 1 0 0 0
+              children [
+                DEF FOOT_RIGHT_APPEARANCE Transform {
+                  translation 0 -0.075 0.06
+                  rotation 1 0 0 1.57
+                  children [
+                    Shape {
+                      geometry Capsule {
+                        height 0.16
+                        radius 0.05
+                      }
+                    }
+                  ]
+                }
+                DEF SENSOR_TOE_RIGHT TouchSensor {
+                  name "SENSOR_TOE_RIGHT"
+                  boundingObject Transform {
+                    translation 0 -0.075 0.135
+                    rotation 1 0 0 1.57
+                    children [
+                      Sphere {
+                        radius 0.05
+                      }
+                    ]
+                  }
+                  physics Physics {
+                    density -1
+                    mass 1e-08
+                  }
+                  type "force-3d"
+                  lookupTable [
+                  ]
+                }
+                DEF SENSOR_HEEL_RIGHT TouchSensor {
+                  name "SENSOR_HEEL_RIGHT"
+                  boundingObject Transform {
+                    translation 0 -0.075 -0.015
+                    rotation 1 0 0 1.57
+                    children [
+                      Sphere {
+                        radius 0.05
+                      }
+                    ]
+                  }
+                  physics Physics {
+                    density -1
+                    mass 1e-08
+                  }
+                  type "force-3d"
+                  lookupTable [
+                  ]
+                }
+                DEF APPEARANCE_ANKLE_RIGHT Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0 0 1
+                    }
+                  }
+                  geometry Sphere {
+                    radius 0.05
+                  }
+                }
+              ]
+              name "ANKLE_RIGHT"
+              boundingObject DEF FOOT_RIGHT Transform {
+                rotation 1 0 0 1.57
+                children [
+                  Sphere {
+                    radius 0.05
+                  }
+                ]
+              }
+              physics Physics {
+                density -1
+                mass 1.25
+                centerOfMass 0 0 0.02
+                inertiaMatrix [
+                  0.005, 0.005, 0.005, 0, 0, 0
+                ]
+              }
+              maxVelocity 10000
+              maxForce 10000
+              position -0.085
+              minStop -0.2618
+              maxStop 0.7854
+            }
+            DEF SHIN_RIGHT Transform {
+              translation 0 -0.25 0
+              children [
+                DEF APPEARANCE_SHIN_RIGHT Shape {
+                  geometry Capsule {
+                    height 0.35
+                    radius 0.05
+                  }
+                }
+              ]
+            }
+            DEF APPEARANCE_KNEE_RIGHT Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 1
+                }
+              }
+              geometry Sphere {
+                radius 0.06
+              }
+            }
+          ]
+          name "KNEE_RIGHT"
+          boundingObject Sphere {
+            radius 0.06
+          }
+          physics Physics {
+            density -1
+            mass 3.5
+            centerOfMass 0 -0.2 0
+            inertiaMatrix [
+              0.05, 0.05, 0.05, 0, 0, 0
+            ]
+          }
+          maxVelocity 10000
+          maxForce 10000
+          position 0.17
+          minStop -0.222
+          maxStop 2
+        }
+        DEF THIGH_RIGHT Transform {
+          translation 0 -0.25 0
+          children [
+            DEF APPEARANCE_THIGH_RIGHT Shape {
+              geometry Capsule {
+                height 0.35
+                radius 0.08
+              }
+            }
+          ]
+        }
+        DEF APPEARANCE_HIP_RIGHT Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0 0 1
+            }
+          }
+          geometry Sphere {
+            radius 0.07
+          }
+        }
+      ]
+      name "HIP_RIGHT"
+      boundingObject Sphere {
+        radius 0.07
+      }
+      physics Physics {
+        density -1
+        mass 8.5
+        centerOfMass 0 -0.2 0
+        inertiaMatrix [
+          0.15, 0.15, 0.15, 0, 0, 0
+        ]
+      }
+      maxVelocity 10000
+      maxForce 10000
+      position -0.1
+      minStop -2
+      maxStop 2
+    }
+  ]
+  name "REGIS"
+  boundingObject Box {
+    size 0.2 0.8 0.2
+  }
+  physics Physics {
+    density -1
+    mass 53.5
+    centerOfMass 0 -0.05 0
+    inertiaMatrix [
+      3, 3, 3, 0, 0, 0
+    ]
+  }
+  controller "version52"
+ controllerArgs "settings.xml articleFrontier_wavy2"
+}
+DEF GROUND Solid {
+  children [
+    DEF APPEARANCE_GROUND Transform {
+      translation 0 0 114
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 1 1
+            }
+            texture ImageTexture {
+              url [
+                "textures/ground.jpg"
+              ]
+            }
+            textureTransform TextureTransform {
+              scale 6 300
+            }
+          }
+          geometry Plane {
+            size 3 231
+          }
+        }
+      ]
+    }
+  ]
+  name "GROUND"
+  boundingObject Plane {
+  }
+}
+DEF MATLAB Supervisor {
+  children [
+    Receiver {
+      channel 2
+    }
+  ]
+}
+DEF PYTHON Supervisor {
+  children [
+    Emitter {
+    }
+    Receiver {
+      channel 2
+    }
+  ]
+}

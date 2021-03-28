@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<job name="__JOBNAME__-__EXPERIMENTTYPE__">
+<timeout>600</timeout>
+<priority>30</priority>
+__TOKEN__
+<asynchronous-storage/>
+  <optimizer name="__OPTIMIZER__">
+__SETTING_OPTIMIZER__
+    <parameters>__PARAMETERS__</parameters>
+__FITNESS_EXPRESSION__
+  </optimizer>
+  <extensions>__STAGE_EXTENSION__</extensions>
+  <dispatcher name="webots">__SETTING_DISPATCHER__</dispatcher>
+</job>

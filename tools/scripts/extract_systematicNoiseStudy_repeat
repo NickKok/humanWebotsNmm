@@ -1,0 +1,89 @@
+#!/bin/bash
+function get_filenames(){
+	#echo "ls $systematicsearch_data | grep $prefix | grep repeat${repeatNumber} | grep $type"
+	filenames=`ls $systematicsearch_data | grep ${prefix}_ | grep repeat${repeatNumber} | grep $type`
+}
+function get_filenames_no_repeat(){
+	#echo "ls $systematicsearch_data | grep $prefix | grep repeat${repeatNumber} | grep $type"
+	filenames=`ls $systematicsearch_data | grep ${prefix}_ | grep -v repeat | grep $type`
+}
+
+function get_num(){
+        repeatNumber=0
+        while [ true ]
+        do
+                repeatNumber=`expr $repeatNumber + 1`
+		get_filenames
+                if [[ -z $filenames ]]
+                then
+                        break
+                fi
+        done
+}
+function do_muscleNoise_study(){
+	for i in {1..10}
+	do
+		echo "Extracting noise muscles study on $i"
+		set_path=$path/conf_$conf/settings/$settings
+		cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+		find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+		find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+		find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+		find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+		find $set_path | xargs perl -pi -e "s/\|NOISE_SENSOR\|/0/g"
+		find $set_path | xargs perl -pi -e "s/\|NOISE_MUSCLE\|/1/g"
+		webots_loadlib -s $settings -c $conf
+	done
+}
+function do_sensorNoise_study(){
+	for i in {1..10}
+	do
+		echo "Extracting noise sensors study on $i"
+		set_path=$path/conf_$conf/settings/$settings
+		cp $path/conf_$conf/settings/$template $path/conf_$conf/settings/$settings
+		find $set_path | xargs perl -pi -e "s/\|CONF\|/$conf/g"
+		find $set_path | xargs perl -pi -e "s/\|TYPE\|/$type/g"
+		find $set_path | xargs perl -pi -e "s/\|FDB\|/$i/g"
+		find $set_path | xargs perl -pi -e "s/\|PREFIX\|/$prefix/g"
+		find $set_path | xargs perl -pi -e "s/\|NOISE_SENSOR\|/1/g"
+		find $set_path | xargs perl -pi -e "s/\|NOISE_MUSCLE\|/0/g"
+		webots_loadlib -s $settings -c $conf
+	done
+}
+
+
+systematicsearch_data="/home/efx/Development/PHD/Airi/current/systematicsearch_data"
+
+
+
+
+
+path="/home/efx/Development/PHD/Airi/current/webots"
+prefix="wavy2"
+
+conf="articleFrontier_$prefix"
+template="template_systematicNoiseStudy.xml"
+settings="current.xml"
+
+
+
+for k in {1..5}
+do
+	
+#	type="noiseMuscleStudy"
+#	do_muscleNoise_study
+#	get_num
+#	get_filenames_no_repeat
+#	for m in $filenames
+#	do
+#		mv $systematicsearch_data/$m $systematicsearch_data/${m}_repeat${repeatNumber}
+#	done
+	type="noiseSensorStudy"
+	do_sensorNoise_study
+	get_num
+	get_filenames_no_repeat
+	for m in $filenames
+	do
+		mv $systematicsearch_data/$m $systematicsearch_data/${m}_repeat${repeatNumber}
+	done
+done

@@ -1,0 +1,20 @@
+    <setting name="max-velocity">0.3</setting>
+    <setting name="coginitive-factor">2.05</setting>
+    <setting name="social-factor">2.05</setting>
+    <setting name="constriction">0.729</setting>
+    <setting name="boundary-condition">Bounce</setting>
+    <setting name="boundary-damping">0.95</setting>
+    <setting name="max-iterations">__MAXITERATIONS__</setting>
+    <setting name="population-size">__POPULATIONSIZE__</setting>
+    <setting name="convergence-threshold">0</setting>
+    <setting name="convergence-window">10</setting>
+    <setting name="min-iterations">20</setting>
+__MULTIPLERUN_START__
+    <setting name="repeat-task">5</setting>
+    <setting name="repeat-task-combine">Minimum</setting>
+__MULTIPLERUN_END__
+
+__INITIALPOPULATION_START__
+    <setting name="initial-population">data/db/__INITDBNAME__</setting>
+    <setting name="initial-population-noise">0.0</setting>
+__INITIALPOPULATION_END__

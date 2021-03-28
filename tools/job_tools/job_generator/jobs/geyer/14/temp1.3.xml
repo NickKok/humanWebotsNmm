@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<job name="cmaes_1.3-FBL">
+<timeout>120</timeout>
+<priority>30</priority>
+<token>280f052a2e9756d69bd240c6ca4e6198</token>
+
+<asynchronous-storage/>
+  <optimizer name="cmaes">
+
+    <setting name="max-iterations">210</setting>
+    <setting name="initial-population-noise">0</setting>
+
+
+    <setting name="initial-population">data/db/init_pop_1.3.db</setting>
+    <setting name="initial-population-noise">0.0</setting>
+
+    <setting name="lambda">20</setting>
+    <setting name="mu">3</setting>
+    <setting name="initialStd">0.35*(50.0/3.0)</setting>
+
+    <setting name="repeat-task">5</setting>
+    <setting name="repeat-task-combine">Minimum</setting>
+
+    <parameters>
+      <!--
+	      Muscle FORCE FEEDBACK
+	      ******************
+      -->
+      <parameter name="solsol_wf" min="0.5" max="2.6"/>
+      <parameter name="solta_wf" min="0.1" max="1.8"/>
+      <parameter name="gasgas_wf" min="0.2" max="1.6"/>
+      <parameter name="vasvas_wf" min="0.95" max="1.8"/>
+      <parameter name="hamham_wf" min="0.1" max="1.0"/>
+      <parameter name="gluglu_wf" min="0.2" max="0.85"/>
+      <!--
+	      Muscle LENGTH FEEDBACK
+	      ******************
+      -->
+      <parameter name="tata_wl" min="1.0" max="3.0"/>
+      <parameter name="hfhf_wl" min="0.2" max="1.5"/>
+      <parameter name="hamhf_wl" min="0.0" max="3.0"/>
+      <parameter name="ta_bl" min="0.0" max="1.0"/>
+      <parameter name="hf_bl" min="0.0" max="1.0"/>
+      <parameter name="ham_bl" min="0.7" max="1.5"/>
+
+      <!--
+	      STANCE PHASE PD
+	      ******************
+      -->
+          <parameter name="kbodyweight" min="0.8" max="2.4"/>
+	  <parameter name="kp" min="1.5" max="3.0"/>
+	  <parameter name="kd" min="0.15" max="0.6"/>
+          <parameter name="kref" min="0.0" max="0.3" />
+      <!--
+	      SWING_END PHASE PD
+	      ******************
+      -->
+<!--
+      <parameter name="hipkp_hf" min="0.0" max="2.0"/>
+      <parameter name="hipkd_hf" min="0.0" max="1.0"/>
+
+      <parameter name="hipkp_glu" min="0.0" max="2.0"/>
+      <parameter name="hipkd_glu" min="0.0" max="1.0"/>
+-->
+<!--
+      <parameter name="kref_hip" min="-3.14" max="0.0"/>
+
+      <parameter name="kneekp_vas" min="0.0" max="2.0"/>
+      <parameter name="kneekd_vas" min="0.0" max="1.0"/>
+      <parameter name="kref_knee" min="0.0" max="1.14"/>
+-->
+      <!--
+		      STANCE_END CST
+		      ******************
+      -->
+      <parameter name="deltas" min="0.0" max="1.05" />
+      <!--<parameter name="deltas_glu" min="0.0" max="1.0" />
+	  <parameter name="deltas_hf" min="0.0" max="1.0" />
+      -->
+      <!--
+		      BASAL MUSCLE ACTIVITY
+		      ******************
+      -->
+      <parameter name="sol_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="ta_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="gas_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="vas_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="ham_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="glu_activitybasal" min="0.01" max="0.1"/>
+      <parameter name="hf_activitybasal" min="0.01" max="0.1"/>
+
+      <!--
+		      STANC SWING PREPARATION
+		      ******************
+      -->
+      <parameter name="stance_end" min="0.0" max="3.0"/>
+      <parameter name="swing_end" min="-2.5" max="-0.0"/>
+		  
+      <!--
+      <parameter name="stance_end" min="0.0" max="3.0"/>
+      <parameter name="swing_end" min="-2.5" max="-0.0"/>
+      -->
+      <parameter name="kphiknee" min="0.0" max="3"/>
+      <parameter name="kphiknee_off" min="0" max="3.14"/>
+      <parameter name="klean" min="0.0" max="2"/>
+    </parameters>
+
+      <fitness>
+        <expression>distance-10*abs(desired_duration-duration))-abs(desired_energy-energy)/1000-abs(torque_sum/1000)</expression>
+		<variable name="dst/cycle">doublestance_duration/cycle</variable>
+                <variable name="omega_changes_time">angular_knee_velocity_change</variable>
+		<variable name="torque">torque_sum/1000</variable>
+                <variable name="E/d">energy/distance</variable>
+                <variable name="E/t">energy/duration</variable>
+                <variable name="desired_speed">1.3</variable>
+                <variable name="desired_duration">80.0/(1.3+0.001)</variable>
+                <variable name="distance_max">80.0</variable>
+                <variable name="actual_speed">distance/(duration+0.001)</variable>
+                <variable name="actual_steplength">distance/(cycle+0.001)/2</variable>
+		<variable name="desired_steplength">1.3*0.3+0.46</variable>
+      </fitness>
+
+
+  </optimizer>
+  <extensions>
+    <extension name="stagecmaes">
+<!--
+
+      <stage while="distance &lt; 10">distance</stage>
+      <stage while="distance/cycle/2.0 &gt; 1.3*0.3+0.4">-distance/cycle/2.0</stage>
+      <stage while="abs(distance/cycle/2.0-(1.3*0.3+0.4)) &gt; 0.1">-abs(distance/cycle/2.0-(1.3*0.3+0.4))</stage>
+-->
+      <stage while="distance &lt; 0.5*80.0">distance</stage>
+<!--
+      <stage while="trunk_mean_angle &gt; 0.105">-trunk_mean_angle</stage>
+      <stage while="trunk_mean_angle &lt; 0.0">trunk_mean_angle</stage>
+      <stage while="angular_knee_velocity_change &gt; 10.0">-angular_knee_velocity_change</stage>
+-->
+<!--      
+
+      <stage while="steplengthSNR &lt; 5.0">steplengthSNR</stage>
+      <stage while="doublestance_duration/cycle &gt; 0.05">-doublestance_duration/cycle</stage>
+      <stage while="abs(1.3 - distance/duration) &gt; 0.07">1.3- abs(1.3 -distance/duration)</stage>
+-->
+
+      <stage>distance-energy/distance/80-torque_sum/1000.0-10*abs(1.3 -distance/duration)</stage>
+    </extension>
+  </extensions>
+  <dispatcher name="webots">
+    <setting name="webotsVersion">6.4.4</setting>
+
+    <setting name="world">/home/dzeladin/Development/sml/current/webots/worlds/rp.wbt</setting>
+
+<!--
+    <setting name="worldBuilderPath">/home/dzeladin/Development/sml/current/webots_tools/world_builder</setting>
+-->
+    <setting name="mode">batch</setting>
+    <setting name="distance_max">80.0</setting>
+    <setting name="duration_max">61.5384615385</setting>
+    <setting name="rescale_parameters">0</setting>
+    <setting name="muscle_activation_noise">0</setting>
+    <setting name="launching_gate">1.3</setting>
+    <setting name="experiment">fullReflex{start_after_step=1}</setting>
+    <setting name="webotsPath">/usr/local/webots644/webots</setting>
+    <setting name="gitbranch">geyer</setting>
+    <setting name="optimizer">cmaes</setting>
+</dispatcher>
+</job>
+

@@ -1,0 +1,28 @@
+Optimization details
+====================
+- Experiment : FBL
+- Initial population : OFF
+- Optimization with full muscle energy model
+- Steplength control 
+	based on linear interpolation of the steplength / speed relationship shown in Geyer2013 figure 2
+===================================
+
+	1	2	3	4	5
+0.8	-	-	*
+1.0	-	-	
+1.2	-	-	-	
+1.4
+1.6
+1.8
+
+
+
+
+
+* : 0.8 - 3 
+	with initial population (just to try)
+
+IP test
+-------
+	1 : with initial population
+	2 : without

@@ -1,0 +1,4 @@
+webotsVersion = R2019b
+#webotsVersion = 8.6.2
+#webotsVersion = 8.6.0
+#webotsVersion = 8.5.1

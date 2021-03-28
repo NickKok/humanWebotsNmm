@@ -1,0 +1,3 @@
+#!/bin/bash 
+
+nano -w config/${1:-sample}/settings.xml
